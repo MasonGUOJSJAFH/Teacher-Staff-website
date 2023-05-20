@@ -1,39 +1,67 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
 
-// Create a database connection pool
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'hujian',
-  database: 'databasedua',
-});
-
-// Parse the request body
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(bodyParser.json());
 
-// Create the profiles route
-app.post('/api/profiles', (req, res) => {
-  const { name, title, researchField } = req.body;
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'facutl_database'
+});
 
-  // Perform the insert operation to save the data to the database
-  const query = `INSERT INTO profiles (name, title, researchField) VALUES (?, ?, ?)`;
-  pool.query(query, [name, title, researchField], (error, results) => {
-    if (error) {
-      console.error('Error inserting profile:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.status(200).json({ success: true });
-    }
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('Connected to database');
+});
+
+app.get('/staff', (req, res) => {
+  const sql = 'SELECT * FROM Staff';
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send(results);
   });
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.get('/staff/:id', (req, res) => {
+  const sql = 'SELECT * FROM Staff WHERE id = ?';
+  db.query(sql, [req.params.id], (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
+app.get('/research/:staff_id', (req, res) => {
+  const sql = 'SELECT * FROM Research WHERE staff_id = ?';
+  db.query(sql, [req.params.staff_id], (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
+app.get('/articles/:staff_id', (req, res) => {
+  const sql = 'SELECT * FROM Articles WHERE staff_id = ?';
+  db.query(sql, [req.params.staff_id], (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+app.put('/staff/:id', (req, res) => {
+  const sql = 'UPDATE Staff SET name = ?, title = ? WHERE id = ?';
+  const data = [req.body.name, req.body.title, req.params.id];
+  db.query(sql, data, (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
 });
