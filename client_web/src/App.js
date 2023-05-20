@@ -6,9 +6,8 @@ import {
 import { Link } from "react-router-dom";
 import StaffProfile from './page/StaffProfile';
 import EditProfile from './page/EditProfile';
-import Expenses from "./routes/expenses";
-import Invoices from "./routes/invoices";
-
+import StaffList from './page/StaffList';
+import StaffDetail from './page/StaffDetail';
 
 import './App.css';
 import HomePage from './page/Home';
@@ -39,9 +38,11 @@ function App() {
 
         <Routes>
           {/* <Route path="/" element={<App />} /> */}
-          <Route path="/" element={<HomePage/>} />
+          <Route path="/"  element={<StaffList/>} />
           <Route path="/profile" element={<StaffProfile profile={mockData}/>} />
-          <Route path="/edit" element={<EditProfile/>} />
+          <Route path="/edit/:id" element={<EditProfile/>} />
+          <Route path="/staff/:id" element={<StaffDetail/>} />
+          <Route path="/stafflist" element={<StaffList/>} />
         </Routes>
       </header>
 
