@@ -23,3 +23,16 @@ CREATE TABLE Articles (
                           PRIMARY KEY (id),
                           FOREIGN KEY (staff_id) REFERENCES Staff(id)
 );
+
+
+INSERT INTO Staff (name, title, image_url) VALUES
+                                               ('John Doe', 'Professor', 'https://example.com/images/john_doe.jpg'),
+                                               ('Jane Smith', 'Lecturer', 'https://example.com/images/jane_smith.jpg');
+
+INSERT INTO Research (staff_id, research_title, research_summary) VALUES
+                                                                      (1, 'Research 1', 'Summary of research 1'),
+                                                                      (2, 'Research 2', 'Summary of research 2');
+
+INSERT INTO Articles (staff_id, article_title, article_url) VALUES
+                                                                (1, 'Article 1', 'https://example.com/articles/article1.pdf'),
+                                                                (2, 'Article 2', 'https://example.com/articles/article2.pdf');
