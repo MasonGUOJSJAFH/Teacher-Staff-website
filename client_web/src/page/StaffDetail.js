@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import './StaffDetail.css';
 function StaffDetail() {
     const { id } = useParams();
     const [staff, setStaff] = useState(null);
@@ -28,25 +28,28 @@ function StaffDetail() {
     }
 
     return (
-        <div>
-            <h1>{staff.name}</h1>
-            <p>{staff.title}</p>
-            <img src={staff.image_url} alt={staff.name} />
+        <div className="staff-detail">
+            <div className="staff-header">
+                <div className="staff-info">
+                    <img className="staff-image" src={staff.image_url} alt={staff.name} />
+                    <h1>{staff.name}</h1>
+                    <p>{staff.title}</p>
+                </div>
+            </div>
             <h2>Research</h2>
             {research.map(r => (
-                <div key={r.id}>
+                <div key={r.id} className="research-item">
                     <h3>{r.research_title}</h3>
                     <p>{r.research_summary}</p>
                 </div>
             ))}
             <h2>Articles</h2>
             {articles.map(a => (
-                <div key={a.id}>
+                <div key={a.id} className="article-item">
                     <a href={a.article_url}>{a.article_title}</a>
                 </div>
             ))}
         </div>
     );
 }
-
 export default StaffDetail;
