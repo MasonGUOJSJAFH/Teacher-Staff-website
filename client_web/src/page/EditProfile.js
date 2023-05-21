@@ -1,68 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import './StaffEdit.css'; // Assuming you have a StaffEdit.css file in the same folder
 
-const styles = {
-  container: {
-    margin: '0 auto',
-    width: '50%',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '10px'
-  },
-  input: {
-    display: 'block',
-    width: '100%',
-    marginBottom: '10px',
-    padding: '10px'
-  },
-  button: {
-    backgroundColor: '#007BFF',
-    color: '#fff',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer'
-  }
-  // add more styles as you need
-};
+function StaffEdit() {
+    const { id } = useParams();
+    const [staff, setStaff] = useState({ name: '', title: '', image_url: '' });
+    const navigate = useNavigate();
 
-const EditProfile = () => {
-  const [name, setName] = useState('');
-  const [title, setTitle] = useState('');
-  const [researchField, setResearchField] = useState('');
-  // ...
+    useEffect(() => {
+        axios.get(`http://localhost:3000/staff/${id}`)
+            .then(response => {
+                setStaff(response.data[0]);
+            });
+    }, [id]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const profile = {
-      name,
-      title,
-      researchField,
-      // ...
-    };
-    // Send a POST request to the server with the new profile
-    const response = await axios.post('/api/profiles', profile);
-    console.log(response.data);
-  };
+    const handleChange = (event) => {
+        setStaff({ ...staff, [event.target.name]: event.target.value });
+    }
 
-  return (
-    <form onSubmit={handleSubmit} style={styles.container}>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={e => setName(e.target.value)} style={styles.input} />
-      </label>
-      <label>
-        Title:
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)} style={styles.input} />
-      </label>
-      <label>
-        Research Field:
-        <input type="text" value={researchField} onChange={e => setResearchField(e.target.value)} style={styles.input} />
-      </label>
-      {/* Add more fields as necessary */}
-      <input type="submit" value="Submit" style={styles.button} />
-    </form>
-  );
-};
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios.put(`http://localhost:3000/staff/${id}`, staff)
+            .then(() => {
+                navigate('/staff/' + id);
+            });
+    }
 
-export default EditProfile;
+    return (
+        <div className="staff-container">
+            <div className="staff-info">
+                <h2>Staff Information</h2>
+                <p>Name: {staff.name}</p>
+                <p>Title: {staff.title}</p>
+                <p><img src={staff.image_url} alt={staff.name} /></p>
+            </div>
+            <form onSubmit={handleSubmit} className="staff-form">
+                <label>
+                    Name:
+                    <input type="text" name="name" value={staff.name} onChange={handleChange} />
+                </label>
+                <label>
+                    Title:
+                    <input type="text" name="title" value={staff.title} onChange={handleChange} />
+                </label>
+                <label>
+                    Image URL:
+                    <input type="text" name="image_url" value={staff.image_url} onChange={handleChange} />
+                </label>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    );
+}
+
+export default StaffEdit;

@@ -1,0 +1,18 @@
+.staff-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.staff-info {
+    width: 40%;
+}
+
+.staff-form {
+    width: 50%;
+}
+
+.staff-info img {
+    max-width: 100%;
+    height: auto;
+}
