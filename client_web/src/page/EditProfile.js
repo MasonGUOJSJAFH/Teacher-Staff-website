@@ -38,15 +38,15 @@ function StaffEdit() {
             <form onSubmit={handleSubmit} className="staff-form">
                 <label>
                     Name:
-                    <input type="text" name="name" value={staff.name} onChange={handleChange} />
+                    <input type="text" name="name"  onChange={handleChange} />
                 </label>
                 <label>
                     Title:
-                    <input type="text" name="title" value={staff.title} onChange={handleChange} />
+                    <input type="text" name="title"  onChange={handleChange} />
                 </label>
                 <label>
                     Image URL:
-                    <input type="text" name="image_url" value={staff.image_url} onChange={handleChange} />
+                    <input type="text" name="image_url"  onChange={handleChange} />
                 </label>
                 <button type="submit">Save</button>
             </form>
