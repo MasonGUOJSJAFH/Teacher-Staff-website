@@ -14,6 +14,7 @@ function StaffList() {
     }, []);
 
     return (
+        <div id="stafflist" className="text-center">
         <div className="staff-list">
             <h1>Staff List</h1>
             {staffList.map(staff => (
@@ -25,6 +26,7 @@ function StaffList() {
                     </div>
                 </div>
             ))}
+        </div>
         </div>
     );
 }
