@@ -10,7 +10,7 @@ function Navbar() {
                     <Link to="/" className="navbar-link">Home</Link>
                 </li>
                 <li>
-                    <Link to="/staff" className="navbar-link">Staff</Link>
+                    <Link to="/stafflist" className="navbar-link">Staff</Link>
                 </li>
                 <li>
                     <Link to="/contact" className="navbar-link">Contact Us</Link>

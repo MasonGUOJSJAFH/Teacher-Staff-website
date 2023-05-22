@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import './StaffDetail.css';
 function StaffDetail() {
     const { id } = useParams();
@@ -34,6 +34,7 @@ function StaffDetail() {
                     <img className="staff-image" src={staff.image_url} alt={staff.name} />
                     <h1>{staff.name}</h1>
                     <p>{staff.title}</p>
+                    <Link to={`/edit/${id}`} className="edit-button">Edit</Link>
                 </div>
             </div>
             <h2>Research</h2>

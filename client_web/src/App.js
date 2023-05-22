@@ -11,6 +11,7 @@ import Navbar from "./page/Navbar";
 import ContactUs from "./page/ContactUs";
 
 import './App.css';
+import MainPage from "./page/MainPage";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
 
         <Routes>
           {/* <Route path="/" element={<App />} /> */}
-          <Route path="/"  element={<StaffList/>} />
+          <Route path="/"  element={<MainPage/>} />
           <Route path="/edit/:id" element={<EditProfile/>} />
           <Route path="/staff/:id" element={<StaffDetail/>} />
           <Route path="/stafflist" element={<StaffList/>} />
