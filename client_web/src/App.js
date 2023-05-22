@@ -8,6 +8,7 @@ import EditProfile from './page/EditProfile';
 import StaffList from './page/StaffList';
 import StaffDetail from './page/StaffDetail';
 import Navbar from "./page/Navbar";
+import ContactUs from "./page/ContactUs";
 
 import './App.css';
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/edit/:id" element={<EditProfile/>} />
           <Route path="/staff/:id" element={<StaffDetail/>} />
           <Route path="/stafflist" element={<StaffList/>} />
+            <Route path="contact" element={<ContactUs/>} />
         </Routes>
       </header>
 
