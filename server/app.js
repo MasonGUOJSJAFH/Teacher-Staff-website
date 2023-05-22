@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: '101.43.166.116',
   user: 'root',
   password: 'hujian',
   database: 'facutl_database'
