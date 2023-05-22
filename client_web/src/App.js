@@ -7,13 +7,14 @@ import { Link } from "react-router-dom";
 import EditProfile from './page/EditProfile';
 import StaffList from './page/StaffList';
 import StaffDetail from './page/StaffDetail';
+import Navbar from "./page/Navbar";
 
 import './App.css';
-import HomePage from './page/Home';
 
 function App() {
   return (
     <div className="App">
+        <Navbar/>
       <header className="App-header">
 
         <nav
