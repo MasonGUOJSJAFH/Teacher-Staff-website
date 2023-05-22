@@ -33,7 +33,7 @@ function StaffEdit() {
                 <h2>Staff Information</h2>
                 <p>Name: {staff.name}</p>
                 <p>Title: {staff.title}</p>
-                <p><img src={staff.image_url} alt={staff.name} /></p>
+                <p><img src={staff.image_url}  alt={staff.name} /></p>
             </div>
             <form onSubmit={handleSubmit} className="staff-form">
                 <label>

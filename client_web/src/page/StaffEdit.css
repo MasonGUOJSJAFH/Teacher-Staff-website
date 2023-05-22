@@ -17,9 +17,8 @@
 }
 
 .staff-info img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
+    height: 250px;
+    width: 200px;
 }
 
 .staff-form {
